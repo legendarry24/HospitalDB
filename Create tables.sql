@@ -48,3 +48,6 @@ ALTER TABLE Department
 ADD CONSTRAINT CN_Department_Phone
 CHECK (Phone LIKE '([0-9][0-9][0-9])[0-9][0-9][0-9][0-9][0-9][0-9][0-9]')	 
 GO
+
+CREATE INDEX IX_DepartmentName
+ON Department (Name)
