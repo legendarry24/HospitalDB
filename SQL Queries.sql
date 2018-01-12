@@ -106,8 +106,8 @@ JOIN Doctor doc ON d.Head = doc.ID
 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
 GROUP BY d.Name
 HAVING COUNT(*) = (SELECT MAX(Amount) 
-				   FROM (SELECT COUNT(*) Amount
-				  		 FROM Department d
-				  		 JOIN Doctor doc ON d.Head = doc.ID
-				  		 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
-				  		 GROUP BY d.Name) AS Result)
+		   		   FROM (SELECT COUNT(*) Amount
+						 FROM Department d
+						 JOIN Doctor doc ON d.Head = doc.ID
+						 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
+						 GROUP BY d.Name) AS Result)
