@@ -64,9 +64,9 @@ SELECT p.Name 'Patient name', COUNT(pd.[DoctorId]) 'Amount of doctors assigned' 
 JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
 GROUP BY p.Name
 HAVING COUNT(pd.[DoctorId]) = (SELECT MAX([Amount of doctors].Amount)
-			       			   FROM (SELECT COUNT(pd.[DoctorId]) Amount FROM Patient p
-									 JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
-									 GROUP BY p.Name) AS [Amount of doctors])
+			       FROM (SELECT COUNT(pd.[DoctorId]) Amount FROM Patient p
+				     JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
+				     GROUP BY p.Name) AS [Amount of doctors])
 
 /*
 6) for each doctor a list of patients who were under his supervision
@@ -106,8 +106,8 @@ JOIN Doctor doc ON d.Head = doc.ID
 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
 GROUP BY d.Name
 HAVING COUNT(*) = (SELECT MAX(Amount) 
-		   		   FROM (SELECT COUNT(*) Amount
-						 FROM Department d
-						 JOIN Doctor doc ON d.Head = doc.ID
-						 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
-						 GROUP BY d.Name) AS Result)
+		   FROM (SELECT COUNT(*) Amount
+			 FROM Department d
+			 JOIN Doctor doc ON d.Head = doc.ID
+			 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
+			 GROUP BY d.Name) AS Result)
