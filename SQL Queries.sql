@@ -57,14 +57,14 @@ HAVING COUNT(pd.[DoctorId]) = 1
 --5) Patients which have max amount of doctors assigned
 SELECT MAX([Amount of doctors].Amount) 'Amount of doctors assigned'
 FROM (SELECT COUNT(pd.[DoctorId]) Amount FROM Patient p
-	  JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
-	  GROUP BY p.Name) AS [Amount of doctors]
+      JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
+      GROUP BY p.Name) AS [Amount of doctors]
 
 SELECT p.Name 'Patient name', COUNT(pd.[DoctorId]) 'Amount of doctors assigned' FROM Patient p
 JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
 GROUP BY p.Name
 HAVING COUNT(pd.[DoctorId]) = (SELECT MAX([Amount of doctors].Amount)
-							   FROM (SELECT COUNT(pd.[DoctorId]) Amount FROM Patient p
+			       			   FROM (SELECT COUNT(pd.[DoctorId]) Amount FROM Patient p
 									 JOIN [PatientDoctor] pd ON p.ID = pd.[PatientId]
 									 GROUP BY p.Name) AS [Amount of doctors])
 
