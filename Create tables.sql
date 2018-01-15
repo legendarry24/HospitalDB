@@ -51,3 +51,34 @@ GO
 
 CREATE INDEX IX_DepartmentName
 ON Department (Name)
+GO
+
+CREATE PROCEDURE [InsertPatient]
+	@name nvarchar(100),
+	@age int
+AS
+BEGIN
+	INSERT INTO Patient (Name, Age)
+	VALUES (@name, @age)
+
+	SELECT SCOPE_IDENTITY()
+END
+GO
+
+CREATE PROC GetPatients
+AS
+BEGIN
+	SELECT * FROM Patient
+END
+GO
+
+ALTER PROC GetAgeRange
+	@Name nvarchar(100),
+	@MinAge int output,
+	@MaxAge int out -- the same this output
+AS
+BEGIN
+	SELECT @MinAge = MIN(Age), @MaxAge = MAX(Age) FROM Patient
+	WHERE Name LIKE '%' + @Name + '%'
+END
+GO
