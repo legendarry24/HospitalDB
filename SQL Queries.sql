@@ -111,3 +111,8 @@ HAVING COUNT(*) = (SELECT MAX(Amount)
 			 JOIN Doctor doc ON d.Head = doc.ID
 			 JOIN PatientDoctor pd ON doc.ID = pd.DoctorId
 			 GROUP BY d.Name) AS Result)
+			 
+DECLARE @MinAge int
+DECLARE @MaxAge int
+EXEC GetAgeRange 'Al', @MaxAge OUTPUT, @MinAge OUT
+SELECT @MaxAge, @MinAge
